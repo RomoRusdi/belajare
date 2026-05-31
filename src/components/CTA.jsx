@@ -1,5 +1,5 @@
-import Reveal from './Reveal.jsx'
-import { site } from '../data.js'
+import Reveal from './Reveal.jsx';
+import { site } from '../data.js';
 
 /**
  * CTA — centered, very tall padding. Mono orange eyebrow, a giant Syne
@@ -38,5 +38,5 @@ export default function CTA() {
         </a>
       </Reveal>
     </section>
-  )
+  );
 }

@@ -1,5 +1,5 @@
-import Reveal from './Reveal.jsx'
-import { stats } from '../data.js'
+import Reveal from './Reveal.jsx';
+import { stats } from '../data.js';
 
 /**
  * Stats — a 4-up row (2-up on mobile) under a top hairline. Each stat is a
@@ -27,5 +27,5 @@ export default function Stats() {
         ))}
       </div>
     </section>
-  )
+  );
 }

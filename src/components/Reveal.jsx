@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion';
 
 /**
  * <Reveal> — fades + rises its children into view once.
@@ -14,17 +14,17 @@ import { motion, useReducedMotion } from 'framer-motion'
  *   ...rest — className, style, etc. are forwarded
  */
 export default function Reveal({ children, delay = 0, as = 'div', className = '', ...rest }) {
-  const reduce = useReducedMotion()
-  const MotionTag = motion[as] || motion.div
+  const reduce = useReducedMotion();
+  const MotionTag = motion[as] || motion.div;
 
   if (reduce) {
     // No entrance animation — show content as-is.
-    const Tag = as
+    const Tag = as;
     return (
       <Tag className={className} {...rest}>
         {children}
       </Tag>
-    )
+    );
   }
 
   return (
@@ -38,5 +38,5 @@ export default function Reveal({ children, delay = 0, as = 'div', className = ''
     >
       {children}
     </MotionTag>
-  )
+  );
 }

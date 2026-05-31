@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 
 /**
  * Preloader — full-screen overlay that counts 0% → 100% then slides away.
@@ -13,50 +13,50 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
  * complete on the next tick so content is available immediately.
  */
 export default function Preloader({ onComplete }) {
-  const reduce = useReducedMotion()
-  const [count, setCount] = useState(0)
-  const [done, setDone] = useState(false)
+  const reduce = useReducedMotion();
+  const [count, setCount] = useState(0);
+  const [done, setDone] = useState(false);
 
   // Lock scroll while the preloader is visible.
   useEffect(() => {
-    document.body.classList.add('is-locked')
-    return () => document.body.classList.remove('is-locked')
-  }, [])
+    document.body.classList.add('is-locked');
+    return () => document.body.classList.remove('is-locked');
+  }, []);
 
   // Reduced motion: don't perform the count animation.
   useEffect(() => {
-    if (!reduce) return
-    setCount(100)
-    document.body.classList.remove('is-locked')
+    if (!reduce) return;
+    setCount(100);
+    document.body.classList.remove('is-locked');
     const t = setTimeout(() => {
-      setDone(true)
-      onComplete?.()
-    }, 0)
-    return () => clearTimeout(t)
-  }, [reduce, onComplete])
+      setDone(true);
+      onComplete?.();
+    }, 0);
+    return () => clearTimeout(t);
+  }, [reduce, onComplete]);
 
   // Count up in random 3–10 increments every ~90ms.
   useEffect(() => {
-    if (reduce) return
-    let current = 0
+    if (reduce) return;
+    let current = 0;
     const id = setInterval(() => {
-      current += Math.floor(Math.random() * 8) + 3 // 3–10
+      current += Math.floor(Math.random() * 8) + 3; // 3–10
       if (current >= 100) {
-        current = 100
-        setCount(100)
-        clearInterval(id)
+        current = 100;
+        setCount(100);
+        clearInterval(id);
         // Hold at 100%, then release.
         setTimeout(() => {
-          document.body.classList.remove('is-locked')
-          setDone(true)
-          onComplete?.()
-        }, 380)
+          document.body.classList.remove('is-locked');
+          setDone(true);
+          onComplete?.();
+        }, 380);
       } else {
-        setCount(current)
+        setCount(current);
       }
-    }, 90)
-    return () => clearInterval(id)
-  }, [reduce, onComplete])
+    }, 90);
+    return () => clearInterval(id);
+  }, [reduce, onComplete]);
 
   return (
     <AnimatePresence>
@@ -70,8 +70,7 @@ export default function Preloader({ onComplete }) {
         >
           {/* Mono status label — bottom-left */}
           <div className="absolute bottom-8 left-[6vw] font-mono text-xs uppercase tracking-[0.2em] text-muted sm:text-sm">
-            Compiling portfolio{' '}
-            <span className="text-muted/60">// loading assets</span>
+            Compiling portfolio <span className="text-muted/60">{'// loading assets'}</span>
           </div>
 
           {/* Huge percentage — bottom-right */}
@@ -90,5 +89,5 @@ export default function Preloader({ onComplete }) {
         </motion.div>
       )}
     </AnimatePresence>
-  )
+  );
 }

@@ -1,6 +1,6 @@
-import Reveal from './Reveal.jsx'
-import SectionHeader from './SectionHeader.jsx'
-import { projects } from '../data.js'
+import Reveal from './Reveal.jsx';
+import SectionHeader from './SectionHeader.jsx';
+import { projects } from '../data.js';
 
 /**
  * Work (02) — an editorial list (not cards). Each row is a grid of
@@ -59,5 +59,5 @@ export default function Work() {
         ))}
       </div>
     </section>
-  )
+  );
 }

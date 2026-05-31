@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
-import { site, navLinks } from '../data.js'
+import { useEffect, useRef, useState } from 'react';
+import { site, navLinks } from '../data.js';
 
 /**
  * Navbar — fixed top, mix-blend-difference so it reads against any section.
@@ -11,25 +11,25 @@ import { site, navLinks } from '../data.js'
  * - Links + status collapse on mobile (logo always shown).
  */
 export default function Navbar() {
-  const [hidden, setHidden] = useState(false)
-  const lastY = useRef(0)
+  const [hidden, setHidden] = useState(false);
+  const lastY = useRef(0);
 
   useEffect(() => {
     const onScroll = () => {
-      const y = window.scrollY
+      const y = window.scrollY;
       // Always show near the very top; otherwise follow scroll direction.
       if (y < 80) {
-        setHidden(false)
+        setHidden(false);
       } else if (y > lastY.current + 6) {
-        setHidden(true) // scrolling down
+        setHidden(true); // scrolling down
       } else if (y < lastY.current - 6) {
-        setHidden(false) // scrolling up
+        setHidden(false); // scrolling up
       }
-      lastY.current = y
-    }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+      lastY.current = y;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   return (
     <header
@@ -79,5 +79,5 @@ export default function Navbar() {
         )}
       </nav>
     </header>
-  )
+  );
 }

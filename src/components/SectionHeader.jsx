@@ -1,4 +1,4 @@
-import Reveal from './Reveal.jsx'
+import Reveal from './Reveal.jsx';
 
 /**
  * SectionHeader — the shared header pattern for sections 01–03.
@@ -13,5 +13,5 @@ export default function SectionHeader({ number, title }) {
         {title}
       </span>
     </Reveal>
-  )
+  );
 }

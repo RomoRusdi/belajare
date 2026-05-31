@@ -1,4 +1,4 @@
-import { site, navLinks, socials } from '../data.js'
+import { site, navLinks, socials } from '../data.js';
 
 /**
  * Footer — top hairline, then three link columns (Navigate / Connect /
@@ -6,30 +6,38 @@ import { site, navLinks, socials } from '../data.js'
  * with a dynamic-year copyright + a "built from scratch" note.
  */
 export default function Footer() {
-  const year = new Date().getFullYear()
+  const year = new Date().getFullYear();
 
   const Column = ({ title, links }) => (
     <div>
-      <h3 className="mb-5 font-mono text-xs uppercase tracking-[0.2em] text-muted">
-        {title}
-      </h3>
+      <h3 className="mb-5 font-mono text-xs uppercase tracking-[0.2em] text-muted">{title}</h3>
       <ul className="space-y-3">
-        {links.map((l) => (
-          <li key={l.label}>
-            <a
-              href={l.href}
-              className="font-mono text-sm uppercase tracking-[0.1em] text-text transition-colors hover:text-orange"
-              {...(l.href.startsWith('http')
-                ? { target: '_blank', rel: 'noreferrer' }
-                : {})}
-            >
-              {l.label}
-            </a>
-          </li>
-        ))}
+        {links.map((l) => {
+          // Treat empty / "#" hrefs as not-yet-filled placeholders and render
+          // them as plain text rather than self-linking anchors.
+          const isPlaceholder = !l.href || l.href === '#';
+          const isExternal = l.href?.startsWith('http');
+          return (
+            <li key={l.label}>
+              {isPlaceholder ? (
+                <span className="font-mono text-sm uppercase tracking-[0.1em] text-muted/60">
+                  {l.label}
+                </span>
+              ) : (
+                <a
+                  href={l.href}
+                  className="font-mono text-sm uppercase tracking-[0.1em] text-text transition-colors hover:text-orange"
+                  {...(isExternal ? { target: '_blank', rel: 'noreferrer' } : {})}
+                >
+                  {l.label}
+                </a>
+              )}
+            </li>
+          );
+        })}
       </ul>
     </div>
-  )
+  );
 
   return (
     <footer className="border-t border-line px-[6vw] pb-10 pt-20">
@@ -58,5 +66,5 @@ export default function Footer() {
         <span>Built from scratch · No templates</span>
       </div>
     </footer>
-  )
+  );
 }

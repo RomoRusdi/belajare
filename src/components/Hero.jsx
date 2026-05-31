@@ -1,6 +1,6 @@
-import { motion, useReducedMotion } from 'framer-motion'
-import { site } from '../data.js'
-import RichText from '../lib/richText.jsx'
+import { motion, useReducedMotion } from 'framer-motion';
+import { site } from '../data.js';
+import RichText from '../lib/richText.jsx';
 
 /**
  * Hero — full viewport, centered. The H1 is three stacked words that each
@@ -11,17 +11,17 @@ import RichText from '../lib/richText.jsx'
  * plays on a clean stage. Reduced motion shows everything immediately.
  */
 export default function Hero({ loaded }) {
-  const reduce = useReducedMotion()
+  const reduce = useReducedMotion();
   // Hold animations until the preloader is done (or skip the wait entirely
   // when reduced motion is on).
-  const go = reduce ? true : loaded
+  const go = reduce ? true : loaded;
 
   // Shared transition for the clipped line rise.
   const lineTransition = (delay) => ({
     duration: 1,
     delay,
     ease: [0.2, 0.7, 0.2, 1],
-  })
+  });
 
   return (
     <section
@@ -83,5 +83,5 @@ export default function Hero({ loaded }) {
         </a>
       </motion.div>
     </section>
-  )
+  );
 }

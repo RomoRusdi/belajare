@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment } from 'react';
 
 /**
  * Render a string with **double-asterisk** spans bolded.
@@ -7,7 +7,7 @@ import { Fragment } from 'react'
  * <RichText text="I'm **Yusuf**" /> → I'm <strong>Yusuf</strong>
  */
 export default function RichText({ text, strongClassName = 'font-semibold text-text' }) {
-  const parts = text.split(/(\*\*[^*]+\*\*)/g)
+  const parts = text.split(/(\*\*[^*]+\*\*)/g);
   return (
     <>
       {parts.map((part, i) => {
@@ -16,10 +16,10 @@ export default function RichText({ text, strongClassName = 'font-semibold text-t
             <strong key={i} className={strongClassName}>
               {part.slice(2, -2)}
             </strong>
-          )
+          );
         }
-        return <Fragment key={i}>{part}</Fragment>
+        return <Fragment key={i}>{part}</Fragment>;
       })}
     </>
-  )
+  );
 }

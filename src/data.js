@@ -27,7 +27,7 @@ export const site = {
   // to bold a span (rendered by the Hero component).
   heroIntro:
     "I'm **Romeo**, a fullstack developer & Computer Engineering student in **Semarang** — I build modern web and mobile apps with React, Node.js, Flutter, and Supabase.",
-}
+};
 
 /* Marquee tech keywords (Marquee section) */
 export const marqueeItems = [
@@ -39,7 +39,7 @@ export const marqueeItems = [
   'MongoDB',
   'Tailwind',
   'Vite',
-]
+];
 
 /* About (01) — big statement. `accents` are words rendered in orange. */
 export const about = {
@@ -50,7 +50,7 @@ export const about = {
     "I'm a Computer Engineering student at **Universitas Diponegoro** (semester 5), focused on fullstack web and mobile development. I build modern, scalable apps with **React, Node.js, Flutter, and Supabase** — and I love turning a rough problem into something that just works.",
     "During my internship at **BBPMP Jawa Tengah** I designed the backend for an IoT water-tank monitoring system — RESTful APIs in Node.js, MQTT for real-time sensor data, and MongoDB for the logs. I'm a **fast learner**, just as happy debugging a server as shaping a clean UI.",
   ],
-}
+};
 
 /* Work (02) — featured projects from the CV. */
 export const projects = [
@@ -69,7 +69,7 @@ export const projects = [
     tags: ['Node.js', 'MQTT', 'MongoDB'],
     link: '#',
   },
-]
+];
 
 /* Stack (03) — technologies. */
 export const stack = [
@@ -85,7 +85,7 @@ export const stack = [
   'Tailwind CSS',
   'Vite',
   'Git',
-]
+];
 
 /* Stats — 4 figures. `value` is the number, `unit` the orange suffix. */
 export const stats = [
@@ -93,7 +93,7 @@ export const stats = [
   { value: '3', unit: '', label: 'Featured projects' },
   { value: '2', unit: '', label: 'Internships' },
   { value: '15', unit: '+', label: 'Technologies' },
-]
+];
 
 /* Navigation links (Navbar + Footer "Navigate" column) */
 export const navLinks = [
@@ -101,7 +101,7 @@ export const navLinks = [
   { label: 'About', href: '#about' },
   { label: 'Stack', href: '#stack' },
   { label: 'Contact', href: '#contact' },
-]
+];
 
 /* Social / external links */
 export const socials = {
@@ -115,4 +115,4 @@ export const socials = {
     { label: 'Instagram', href: 'https://www.instagram.com/raffael45__/' },
     { label: 'Diponegoro Univ.', href: 'https://undip.ac.id/' },
   ],
-}
+};

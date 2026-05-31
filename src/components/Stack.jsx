@@ -1,6 +1,6 @@
-import Reveal from './Reveal.jsx'
-import SectionHeader from './SectionHeader.jsx'
-import { stack } from '../data.js'
+import Reveal from './Reveal.jsx';
+import SectionHeader from './SectionHeader.jsx';
+import { stack } from '../data.js';
 
 /**
  * Stack (03) — a grid of tech cells separated by 1px hairline gaps. The
@@ -35,5 +35,5 @@ export default function Stack() {
         </div>
       </Reveal>
     </section>
-  )
+  );
 }

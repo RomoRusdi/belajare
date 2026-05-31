@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="MR">
+  <rect width="100" height="100" rx="22" fill="#0b0a08" />
+  <text
+    x="50"
+    y="70"
+    text-anchor="middle"
+    font-family="'JetBrains Mono', monospace"
+    font-size="52"
+    font-weight="700"
+    fill="#f3eee6"
+  >
+    M
+  </text>
+  <circle cx="80" cy="66" r="7" fill="#ff5a1f" />
+</svg>

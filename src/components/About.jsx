@@ -1,7 +1,7 @@
-import Reveal from './Reveal.jsx'
-import SectionHeader from './SectionHeader.jsx'
-import RichText from '../lib/richText.jsx'
-import { about } from '../data.js'
+import Reveal from './Reveal.jsx';
+import SectionHeader from './SectionHeader.jsx';
+import RichText from '../lib/richText.jsx';
+import { about } from '../data.js';
 
 /**
  * About (01) — a big statement (with orange-accented words) over a
@@ -10,20 +10,20 @@ import { about } from '../data.js'
 export default function About() {
   // Wrap each accent word in an orange span inside the statement.
   const renderStatement = () => {
-    const accentSet = new Set(about.accents.map((a) => a.toLowerCase()))
+    const accentSet = new Set(about.accents.map((a) => a.toLowerCase()));
     // Split on whitespace but keep the separators.
     return about.statement.split(/(\s+)/).map((token, i) => {
-      const bare = token.replace(/[.,!?;:]/g, '').toLowerCase()
+      const bare = token.replace(/[.,!?;:]/g, '').toLowerCase();
       if (accentSet.has(bare)) {
         return (
           <span key={i} className="text-orange">
             {token}
           </span>
-        )
+        );
       }
-      return <span key={i}>{token}</span>
-    })
-  }
+      return <span key={i}>{token}</span>;
+    });
+  };
 
   return (
     <section id="about" className="px-[6vw] py-24 md:py-36">
@@ -50,5 +50,5 @@ export default function About() {
         ))}
       </div>
     </section>
-  )
+  );
 }
