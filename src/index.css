@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Design tokens — mirrored from tailwind.config.js so they can
+   be used in raw CSS (gradients, strokes, keyframes, etc.)
+   ============================================================ */
+:root {
+  --bg: #0b0a08;
+  --bg-elev: #13110e;
+  --orange: #ff5a1f;
+  --orange-deep: #e8470c;
+  --text: #f3eee6;
+  --muted: #8d867b;
+  --line: rgba(243, 238, 230, 0.12);
+  --line-soft: rgba(243, 238, 230, 0.06);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  /* Orange selection / black text */
+  ::selection {
+    background: var(--orange);
+    color: #000;
+  }
+
+  /* Visible focus for keyboard users on interactive elements */
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--orange);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* When the preloader locks scroll */
+  body.is-locked {
+    overflow: hidden;
+  }
+}
+
+@layer utilities {
+  /* Outline / stroked display type. Pass the stroke colour via
+     --stroke (defaults to orange). */
+  .text-outline {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--stroke, var(--orange));
+  }
+
+  .text-stroke-text {
+    --stroke: var(--text);
+  }
+
+  .text-stroke-line {
+    --stroke: var(--line);
+  }
+
+  /* Animated marquee track. Duplicate the content inside, then this
+     slides exactly one copy width (-50%) for a seamless loop. */
+  .animate-marquee {
+    animation: marquee 26s linear infinite;
+  }
+
+  /* Bobbing scroll-cue arrow */
+  .animate-bob {
+    animation: bob 1.8s ease-in-out infinite;
+  }
+
+  /* Pulsing "available" status dot */
+  .animate-pulse-dot {
+    animation: pulse-dot 1.8s ease-in-out infinite;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.8);
+  }
+}
+
+/* ============================================================
+   Reduced motion — kill decorative animation, reveal everything.
+   Framer Motion is handled separately via useReducedMotion().
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
