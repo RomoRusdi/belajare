@@ -47,10 +47,7 @@ export default function Hero({ loaded }) {
           intercepts pointer events. Wrapped in an error boundary so a WebGL
           failure can never blank the hero. */}
       {showCanvas && (
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 z-0"
-        >
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
           <ErrorBoundary>
             <Suspense fallback={null}>
               <HeroCanvas />
@@ -73,57 +70,57 @@ export default function Hero({ loaded }) {
 
       {/* Foreground content sits above the canvas + vignette. */}
       <div className="relative z-10">
-      {/* Kicker */}
-      <motion.p
-        className="mb-6 font-mono text-label uppercase text-orange"
-        initial={reduce ? false : { opacity: 0, y: 18 }}
-        animate={go ? { opacity: 1, y: 0 } : undefined}
-        transition={{ duration: 0.7, delay: 0.1, ease: [0.2, 0.7, 0.2, 1] }}
-      >
-        {site.role}
-      </motion.p>
-
-      {/* Headline — clipped line-by-line rise */}
-      <h1 className="text-display-xl text-balance font-display font-extrabold uppercase">
-        {site.heroLines.map((line, i) => (
-          <span key={line.text} className="block overflow-hidden pb-[0.04em]">
-            <motion.span
-              className={`block ${line.outline ? 'text-outline' : ''}`}
-              initial={reduce ? false : { y: '110%' }}
-              animate={go ? { y: '0%' } : undefined}
-              transition={lineTransition(0.25 + i * 0.15)}
-            >
-              {line.text}
-            </motion.span>
-          </span>
-        ))}
-      </h1>
-
-      {/* Footer row — intro + scroll cue, fade in last */}
-      <motion.div
-        className="mt-14 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between"
-        initial={reduce ? false : { opacity: 0, y: 20 }}
-        animate={go ? { opacity: 1, y: 0 } : undefined}
-        transition={{ duration: 0.9, delay: 0.9, ease: [0.2, 0.7, 0.2, 1] }}
-      >
-        <p className="max-w-[60ch] text-body-lg text-pretty text-hang text-muted-2">
-          <RichText text={site.heroIntro} />
-        </p>
-
-        <a
-          href="#about"
-          onClick={(e) => {
-            e.preventDefault();
-            scrollToTarget('#about');
-          }}
-          className="group flex shrink-0 items-center gap-3 font-mono text-label uppercase text-muted transition-colors hover:text-text"
+        {/* Kicker */}
+        <motion.p
+          className="mb-6 font-mono text-label uppercase text-orange"
+          initial={reduce ? false : { opacity: 0, y: 18 }}
+          animate={go ? { opacity: 1, y: 0 } : undefined}
+          transition={{ duration: 0.7, delay: 0.1, ease: [0.2, 0.7, 0.2, 1] }}
         >
-          Scroll
-          <span className="animate-bob text-orange" aria-hidden="true">
-            ↓
-          </span>
-        </a>
-      </motion.div>
+          {site.role}
+        </motion.p>
+
+        {/* Headline — clipped line-by-line rise */}
+        <h1 className="text-display-xl text-balance font-display font-extrabold uppercase">
+          {site.heroLines.map((line, i) => (
+            <span key={line.text} className="block overflow-hidden pb-[0.04em]">
+              <motion.span
+                className={`block ${line.outline ? 'text-outline' : ''}`}
+                initial={reduce ? false : { y: '110%' }}
+                animate={go ? { y: '0%' } : undefined}
+                transition={lineTransition(0.25 + i * 0.15)}
+              >
+                {line.text}
+              </motion.span>
+            </span>
+          ))}
+        </h1>
+
+        {/* Footer row — intro + scroll cue, fade in last */}
+        <motion.div
+          className="mt-14 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between"
+          initial={reduce ? false : { opacity: 0, y: 20 }}
+          animate={go ? { opacity: 1, y: 0 } : undefined}
+          transition={{ duration: 0.9, delay: 0.9, ease: [0.2, 0.7, 0.2, 1] }}
+        >
+          <p className="max-w-[60ch] text-body-lg text-pretty text-hang text-muted-2">
+            <RichText text={site.heroIntro} />
+          </p>
+
+          <a
+            href="#about"
+            onClick={(e) => {
+              e.preventDefault();
+              scrollToTarget('#about');
+            }}
+            className="group flex shrink-0 items-center gap-3 font-mono text-label uppercase text-muted transition-colors hover:text-text"
+          >
+            Scroll
+            <span className="animate-bob text-orange" aria-hidden="true">
+              ↓
+            </span>
+          </a>
+        </motion.div>
       </div>
     </section>
   );

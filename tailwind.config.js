@@ -24,9 +24,15 @@ export default {
       // each with the font/weight noted (tokens can't carry family/weight).
       fontSize: {
         // display-xl — Syne 800 — hero + CTA headline
-        'display-xl': ['clamp(40px, 9.5vw, 150px)', { lineHeight: '0.84', letterSpacing: '-0.04em' }],
+        'display-xl': [
+          'clamp(40px, 9.5vw, 150px)',
+          { lineHeight: '0.84', letterSpacing: '-0.04em' },
+        ],
         // display-lg — Syne 700 — About statement
-        'display-lg': ['clamp(28px, 4.6vw, 76px)', { lineHeight: '1.02', letterSpacing: '-0.025em' }],
+        'display-lg': [
+          'clamp(28px, 4.6vw, 76px)',
+          { lineHeight: '1.02', letterSpacing: '-0.025em' },
+        ],
         // display-md — Syne 700 — Work item names
         'display-md': ['clamp(26px, 3.6vw, 52px)', { lineHeight: '1.0', letterSpacing: '-0.02em' }],
         // stat — Syne 800 — stat numbers

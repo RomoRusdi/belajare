@@ -8,7 +8,13 @@
  *   accent — render in the orange accent colour instead of muted
  *   className / ...rest — forwarded (extra spacing, hover states, etc.)
  */
-export default function Label({ as: Tag = 'span', accent = false, className = '', children, ...rest }) {
+export default function Label({
+  as: Tag = 'span',
+  accent = false,
+  className = '',
+  children,
+  ...rest
+}) {
   return (
     <Tag
       className={`font-mono text-label uppercase ${accent ? 'text-orange' : 'text-muted'} ${className}`}

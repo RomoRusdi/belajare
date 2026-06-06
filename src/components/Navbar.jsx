@@ -37,9 +37,7 @@ export default function Navbar() {
   // upper-middle of the viewport. The rootMargin band keeps exactly one
   // section active at a time.
   useEffect(() => {
-    const sections = navLinks
-      .map((l) => document.querySelector(l.href))
-      .filter(Boolean);
+    const sections = navLinks.map((l) => document.querySelector(l.href)).filter(Boolean);
     if (!sections.length) return undefined;
 
     const io = new IntersectionObserver(
@@ -48,7 +46,7 @@ export default function Navbar() {
           if (e.isIntersecting) setActive(`#${e.target.id}`);
         });
       },
-      { rootMargin: '-45% 0px -50% 0px', threshold: 0 },
+      { rootMargin: '-45% 0px -50% 0px', threshold: 0 }
     );
     sections.forEach((s) => io.observe(s));
     return () => io.disconnect();

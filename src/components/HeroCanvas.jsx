@@ -119,7 +119,7 @@ function ParticleField({ count, parallax }) {
         depthWrite: false,
         blending: THREE.AdditiveBlending,
       }),
-    [],
+    []
   );
 
   // Keep the shader's pixel ratio in sync with the renderer.
@@ -148,10 +148,13 @@ function ParticleField({ count, parallax }) {
   }, [parallax]);
 
   // Dispose GPU resources on unmount to avoid leaks.
-  useEffect(() => () => {
-    geometry.dispose();
-    material.dispose();
-  }, [geometry, material]);
+  useEffect(
+    () => () => {
+      geometry.dispose();
+      material.dispose();
+    },
+    [geometry, material]
+  );
 
   useFrame((state, delta) => {
     const t = state.clock.elapsedTime;
@@ -200,15 +203,18 @@ export default function HeroCanvas() {
     const el = wrapRef.current;
     if (!el) return;
 
-    const io = new IntersectionObserver(
-      ([entry]) => setActive(entry.isIntersecting),
-      { threshold: 0 },
-    );
+    const io = new IntersectionObserver(([entry]) => setActive(entry.isIntersecting), {
+      threshold: 0,
+    });
     io.observe(el);
 
     const onVisibility = () => {
       if (document.hidden) setActive(false);
-      else setActive(el.getBoundingClientRect().bottom > 0 && el.getBoundingClientRect().top < window.innerHeight);
+      else
+        setActive(
+          el.getBoundingClientRect().bottom > 0 &&
+            el.getBoundingClientRect().top < window.innerHeight
+        );
     };
     document.addEventListener('visibilitychange', onVisibility);
 
