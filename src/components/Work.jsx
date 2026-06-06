@@ -1,5 +1,6 @@
 import Reveal from './Reveal.jsx';
 import SectionHeader from './SectionHeader.jsx';
+import Label from './Label.jsx';
 import { projects } from '../data.js';
 
 /**
@@ -20,40 +21,52 @@ export default function Work() {
           <Reveal key={p.name} delay={i * 0.06}>
             <a
               href={p.link}
-              className="group grid grid-cols-1 items-center gap-2 border-b border-line py-7 transition-all duration-300 ease-[cubic-bezier(.2,.7,.2,1)] hover:bg-bg-elev hover:pl-[30px] md:grid-cols-[auto_1fr_auto_auto] md:gap-8 md:py-8"
+              className="group grid grid-cols-1 items-center gap-4 border-b border-line py-7 transition-all duration-300 ease-[cubic-bezier(.2,.7,.2,1)] hover:bg-bg-elev hover:pl-[30px] md:grid-cols-[auto_150px_1fr_auto_auto] md:gap-8 md:py-8"
             >
               {/* Number — hidden on mobile */}
-              <span className="hidden font-mono text-sm text-muted md:block">
+              <Label as="span" className="hidden md:block">
                 {String(i + 1).padStart(2, '0')}
-              </span>
+              </Label>
+
+              {/* Duotone thumbnail — full width on mobile (stacks above text),
+                  fixed-size on desktop. All thumbs share the identical
+                  aspect/treatment so the section reads as art-directed. */}
+              <div className="work-thumb w-full md:w-[150px]">
+                <img
+                  className="work-thumb__img"
+                  src={p.image}
+                  alt={p.imageAlt}
+                  loading="lazy"
+                  decoding="async"
+                  width="1600"
+                  height="1000"
+                />
+                <span className="work-thumb__tint" aria-hidden="true" />
+                <span className="work-thumb__overlay" aria-hidden="true" />
+              </div>
 
               {/* Name */}
-              <span
-                className="font-display font-bold leading-none transition-colors duration-300 group-hover:text-orange"
-                style={{ fontSize: 'clamp(26px, 3.6vw, 52px)' }}
-              >
+              <span className="text-display-md text-balance font-display font-bold transition-colors duration-300 group-hover:text-orange">
                 {p.name}
               </span>
 
               {/* Tags */}
               <span className="flex flex-wrap gap-2">
                 {p.tags.map((t) => (
-                  <span
-                    key={t}
-                    className="rounded-full border border-line px-3 py-1 font-mono text-[10px] uppercase tracking-[0.15em] text-muted"
-                  >
+                  <Label key={t} className="rounded-full border border-line px-3 py-1">
                     {t}
-                  </span>
+                  </Label>
                 ))}
               </span>
 
               {/* View → — hidden by default, slides in on hover (desktop) */}
-              <span
-                className="hidden translate-x-2 font-mono text-xs uppercase tracking-[0.2em] text-muted opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:text-orange group-hover:opacity-100 md:block"
+              <Label
+                as="span"
                 aria-hidden="true"
+                className="hidden translate-x-2 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:text-orange group-hover:opacity-100 md:block"
               >
                 View →
-              </span>
+              </Label>
             </a>
           </Reveal>
         ))}

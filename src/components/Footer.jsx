@@ -1,4 +1,5 @@
 import { site, navLinks, socials } from '../data.js';
+import Label from './Label.jsx';
 
 /**
  * Footer — top hairline, then three link columns (Navigate / Connect /
@@ -10,7 +11,9 @@ export default function Footer() {
 
   const Column = ({ title, links }) => (
     <div>
-      <h3 className="mb-5 font-mono text-xs uppercase tracking-[0.2em] text-muted">{title}</h3>
+      <Label as="h3" className="mb-5 block">
+        {title}
+      </Label>
       <ul className="space-y-3">
         {links.map((l) => {
           // Treat empty / "#" hrefs as not-yet-filled placeholders and render
@@ -20,13 +23,11 @@ export default function Footer() {
           return (
             <li key={l.label}>
               {isPlaceholder ? (
-                <span className="font-mono text-sm uppercase tracking-[0.1em] text-muted/60">
-                  {l.label}
-                </span>
+                <span className="font-mono text-label uppercase text-muted/60">{l.label}</span>
               ) : (
                 <a
                   href={l.href}
-                  className="font-mono text-sm uppercase tracking-[0.1em] text-text transition-colors hover:text-orange"
+                  className="font-mono text-label uppercase text-text transition-colors hover:text-orange"
                   {...(isExternal ? { target: '_blank', rel: 'noreferrer' } : {})}
                 >
                   {l.label}
@@ -59,7 +60,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom row */}
-      <div className="mt-12 flex flex-col gap-3 border-t border-line pt-8 font-mono text-xs uppercase tracking-[0.15em] text-muted sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-12 flex flex-col gap-3 border-t border-line pt-8 font-mono text-label uppercase text-muted sm:flex-row sm:items-center sm:justify-between">
         <span>
           © {year} {site.name}
         </span>

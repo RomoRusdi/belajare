@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { site, navLinks } from '../data.js';
+import { scrollToTarget } from '../lib/smoothScroll.js';
 
 /**
  * Navbar — fixed top, mix-blend-difference so it reads against any section.
@@ -12,6 +13,7 @@ import { site, navLinks } from '../data.js';
  */
 export default function Navbar() {
   const [hidden, setHidden] = useState(false);
+  const [active, setActive] = useState('');
   const lastY = useRef(0);
 
   useEffect(() => {
@@ -30,6 +32,33 @@ export default function Navbar() {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  // Active-section highlighting: flag whichever section is crossing the
+  // upper-middle of the viewport. The rootMargin band keeps exactly one
+  // section active at a time.
+  useEffect(() => {
+    const sections = navLinks
+      .map((l) => document.querySelector(l.href))
+      .filter(Boolean);
+    if (!sections.length) return undefined;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) setActive(`#${e.target.id}`);
+        });
+      },
+      { rootMargin: '-45% 0px -50% 0px', threshold: 0 },
+    );
+    sections.forEach((s) => io.observe(s));
+    return () => io.disconnect();
+  }, []);
+
+  const onNavClick = (e, href) => {
+    e.preventDefault();
+    setActive(href);
+    scrollToTarget(href);
+  };
 
   return (
     <header
@@ -53,23 +82,37 @@ export default function Navbar() {
 
         {/* Center / right links — hidden on mobile */}
         <ul className="hidden items-center gap-8 md:flex">
-          {navLinks.map((l) => (
-            <li key={l.label}>
-              <a
-                href={l.href}
-                className="group relative font-mono text-xs uppercase tracking-[0.18em]"
-              >
-                {l.label}
-                {/* animated underline */}
-                <span className="absolute -bottom-1 left-0 h-px w-full origin-right scale-x-0 bg-text transition-transform duration-300 ease-out group-hover:origin-left group-hover:scale-x-100" />
-              </a>
-            </li>
-          ))}
+          {navLinks.map((l) => {
+            const isActive = active === l.href;
+            return (
+              <li key={l.label}>
+                <a
+                  href={l.href}
+                  onClick={(e) => onNavClick(e, l.href)}
+                  aria-current={isActive ? 'true' : undefined}
+                  className={`group relative font-mono text-label uppercase transition-colors ${
+                    isActive ? 'text-orange' : ''
+                  }`}
+                >
+                  {l.label}
+                  {/* Underline — animated on hover; stays lit (orange) while
+                      this section is active so it reads on the blend. */}
+                  <span
+                    className={`absolute -bottom-1 left-0 h-px w-full transition-transform duration-300 ease-out ${
+                      isActive
+                        ? 'origin-left scale-x-100 bg-orange'
+                        : 'origin-right scale-x-0 bg-text group-hover:origin-left group-hover:scale-x-100'
+                    }`}
+                  />
+                </a>
+              </li>
+            );
+          })}
         </ul>
 
         {/* Status — hidden on mobile */}
         {site.available && (
-          <div className="hidden items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] md:flex">
+          <div className="hidden items-center gap-2 font-mono text-label uppercase md:flex">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-pulse-dot rounded-full bg-green-400" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400" />

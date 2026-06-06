@@ -1,6 +1,16 @@
+import { lazy, Suspense } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { site } from '../data.js';
 import RichText from '../lib/richText.jsx';
+import ErrorBoundary from './ErrorBoundary.jsx';
+import { HERO_CONFIG } from '../config.js';
+import { supportsWebGL } from '../lib/webgl.js';
+import { scrollToTarget } from '../lib/smoothScroll.js';
+
+// Code-split the three.js scene so it never blocks first paint. Until it
+// loads — and as the fallback when WebGL is unavailable or errors — the CSS
+// hero background simply shows through.
+const HeroCanvas = lazy(() => import('./HeroCanvas.jsx'));
 
 /**
  * Hero — full viewport, centered. The H1 is three stacked words that each
@@ -23,14 +33,49 @@ export default function Hero({ loaded }) {
     ease: [0.2, 0.7, 0.2, 1],
   });
 
+  // Mount the WebGL background only when it can run well: enabled, WebGL is
+  // available, and the user hasn't asked for reduced motion. Otherwise the
+  // CSS hero background stays — a broken/janky canvas is worse than none.
+  const showCanvas = HERO_CONFIG.enabled && !reduce && supportsWebGL();
+
   return (
     <section
       id="top"
       className="relative flex min-h-svh flex-col justify-center px-[6vw] pb-16 pt-28"
     >
+      {/* WebGL particle field — purely decorative, behind everything, never
+          intercepts pointer events. Wrapped in an error boundary so a WebGL
+          failure can never blank the hero. */}
+      {showCanvas && (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-0"
+        >
+          <ErrorBoundary>
+            <Suspense fallback={null}>
+              <HeroCanvas />
+            </Suspense>
+          </ErrorBoundary>
+        </div>
+      )}
+
+      {/* Radial vignette — darkens the centre behind the headline so the
+          white type keeps contrast over the bloom. Sits between canvas and
+          text. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-[1]"
+        style={{
+          background:
+            'radial-gradient(ellipse 70% 60% at 50% 45%, rgba(11,10,8,0.65) 0%, rgba(11,10,8,0.35) 38%, rgba(11,10,8,0) 75%)',
+        }}
+      />
+
+      {/* Foreground content sits above the canvas + vignette. */}
+      <div className="relative z-10">
       {/* Kicker */}
       <motion.p
-        className="mb-6 font-mono text-xs uppercase tracking-[0.25em] text-orange sm:text-sm"
+        className="mb-6 font-mono text-label uppercase text-orange"
         initial={reduce ? false : { opacity: 0, y: 18 }}
         animate={go ? { opacity: 1, y: 0 } : undefined}
         transition={{ duration: 0.7, delay: 0.1, ease: [0.2, 0.7, 0.2, 1] }}
@@ -39,14 +84,7 @@ export default function Hero({ loaded }) {
       </motion.p>
 
       {/* Headline — clipped line-by-line rise */}
-      <h1
-        className="font-display font-extrabold uppercase"
-        style={{
-          lineHeight: 0.86,
-          letterSpacing: '-0.03em',
-          fontSize: 'clamp(40px, 10vw, 150px)',
-        }}
-      >
+      <h1 className="text-display-xl text-balance font-display font-extrabold uppercase">
         {site.heroLines.map((line, i) => (
           <span key={line.text} className="block overflow-hidden pb-[0.04em]">
             <motion.span
@@ -68,13 +106,17 @@ export default function Hero({ loaded }) {
         animate={go ? { opacity: 1, y: 0 } : undefined}
         transition={{ duration: 0.9, delay: 0.9, ease: [0.2, 0.7, 0.2, 1] }}
       >
-        <p className="max-w-md text-base text-muted sm:text-lg">
+        <p className="max-w-[60ch] text-body-lg text-pretty text-hang text-muted-2">
           <RichText text={site.heroIntro} />
         </p>
 
         <a
           href="#about"
-          className="group flex shrink-0 items-center gap-3 font-mono text-xs uppercase tracking-[0.2em] text-muted transition-colors hover:text-text"
+          onClick={(e) => {
+            e.preventDefault();
+            scrollToTarget('#about');
+          }}
+          className="group flex shrink-0 items-center gap-3 font-mono text-label uppercase text-muted transition-colors hover:text-text"
         >
           Scroll
           <span className="animate-bob text-orange" aria-hidden="true">
@@ -82,6 +124,7 @@ export default function Hero({ loaded }) {
           </span>
         </a>
       </motion.div>
+      </div>
     </section>
   );
 }

@@ -31,10 +31,7 @@ export default function About() {
 
       {/* Big statement */}
       <Reveal>
-        <h2
-          className="max-w-[16ch] font-display font-bold leading-[1.05]"
-          style={{ fontSize: 'clamp(28px, 4.6vw, 76px)' }}
-        >
+        <h2 className="max-w-[16ch] text-display-lg text-balance font-display font-bold">
           {renderStatement()}
         </h2>
       </Reveal>
@@ -43,7 +40,7 @@ export default function About() {
       <div className="mt-16 grid grid-cols-1 gap-10 md:grid-cols-[1.4fr_1fr] md:gap-16">
         {about.paragraphs.map((p, i) => (
           <Reveal key={i} delay={i * 0.1}>
-            <p className="text-base leading-relaxed text-muted sm:text-lg">
+            <p className="max-w-[52ch] text-body-lg text-pretty text-hang text-muted-2">
               <RichText text={p} />
             </p>
           </Reveal>

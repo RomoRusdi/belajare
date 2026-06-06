@@ -1,4 +1,5 @@
 import Reveal from './Reveal.jsx';
+import Label from './Label.jsx';
 import { site } from '../data.js';
 
 /**
@@ -13,16 +14,13 @@ export default function CTA() {
       className="flex flex-col items-center px-[6vw] py-40 text-center md:py-56"
     >
       <Reveal>
-        <p className="mb-8 font-mono text-xs uppercase tracking-[0.25em] text-orange sm:text-sm">
+        <Label as="p" accent className="mb-8">
           Got a problem worth solving?
-        </p>
+        </Label>
       </Reveal>
 
       <Reveal delay={0.08}>
-        <h2
-          className="font-display font-extrabold uppercase leading-[0.9]"
-          style={{ fontSize: 'clamp(44px, 11vw, 170px)', letterSpacing: '-0.03em' }}
-        >
+        <h2 className="text-display-xl text-balance font-display font-extrabold uppercase">
           <span className="block">Let&rsquo;s build</span>
           {/* outline style strokes in `text` colour per spec */}
           <span className="block text-outline text-stroke-text">something</span>

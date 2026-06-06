@@ -1,4 +1,5 @@
 import Reveal from './Reveal.jsx';
+import Label from './Label.jsx';
 import { stats } from '../data.js';
 
 /**
@@ -12,16 +13,11 @@ export default function Stats() {
         {stats.map((s, i) => (
           <Reveal key={s.label} delay={i * 0.08}>
             <div className="flex flex-col gap-3">
-              <div
-                className="font-display font-extrabold leading-none tracking-tight"
-                style={{ fontSize: 'clamp(46px, 7vw, 108px)' }}
-              >
+              <div className="text-stat nums-tabular font-display font-extrabold">
                 {s.value}
                 {s.unit && <span className="text-orange">{s.unit}</span>}
               </div>
-              <div className="font-mono text-xs uppercase tracking-[0.18em] text-muted">
-                {s.label}
-              </div>
+              <Label>{s.label}</Label>
             </div>
           </Reveal>
         ))}

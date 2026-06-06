@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img">
+  <!-- PLACEHOLDER — replace with a real 16:10 screenshot of DompetKu. -->
+  <defs>
+    <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#26262e"/>
+      <stop offset="1" stop-color="#101014"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#g2)"/>
+  <rect x="0" y="0" width="1600" height="90" fill="#34343d"/>
+  <circle cx="60" cy="45" r="14" fill="#cfcfd8"/>
+  <circle cx="110" cy="45" r="14" fill="#9a9aa6"/>
+  <circle cx="160" cy="45" r="14" fill="#6c6c78"/>
+  <!-- chart bars of varying brightness -->
+  <rect x="160" y="640" width="120" height="200" fill="#5a5a66"/>
+  <rect x="320" y="520" width="120" height="320" fill="#8c8c98"/>
+  <rect x="480" y="420" width="120" height="420" fill="#c4c4cc"/>
+  <rect x="640" y="560" width="120" height="280" fill="#70707c"/>
+  <rect x="800" y="360" width="120" height="480" fill="#e6e6ec"/>
+  <rect x="960" y="600" width="120" height="240" fill="#62626e"/>
+  <circle cx="1280" cy="420" r="210" fill="none" stroke="#d8d8e0" stroke-width="70"/>
+  <rect x="160" y="180" width="520" height="60" rx="10" fill="#46464f"/>
+  <text x="160" y="320" font-family="monospace" font-size="120" font-weight="700" fill="#f2f2f7">02</text>
+</svg>

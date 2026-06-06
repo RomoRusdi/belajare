@@ -52,22 +52,31 @@ export const about = {
   ],
 };
 
-/* Work (02) — featured projects from the CV. */
+/* Work (02) — featured projects from the CV.
+ * TODO: the `image` paths point at placeholder thumbnails in /public/work/.
+ *       Drop in real 16:10 screenshots (the duotone treatment is applied
+ *       automatically, so source colours don't matter) and keep the paths. */
 export const projects = [
   {
     name: 'MyBookshelf',
     tags: ['PWA', 'React', 'Supabase'],
     link: '#',
+    image: '/work/01.svg',
+    imageAlt: 'MyBookshelf — a reading-tracker progressive web app',
   },
   {
     name: 'DompetKu',
     tags: ['React', 'Supabase', 'Recharts'],
     link: '#',
+    image: '/work/02.svg',
+    imageAlt: 'DompetKu — a personal finance dashboard with charts',
   },
   {
     name: 'Water Tank IoT',
     tags: ['Node.js', 'MQTT', 'MongoDB'],
     link: '#',
+    image: '/work/03.svg',
+    imageAlt: 'Water Tank IoT — a real-time tank monitoring dashboard',
   },
 ];
 

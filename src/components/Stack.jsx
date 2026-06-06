@@ -24,7 +24,7 @@ export default function Stack() {
               key={tech}
               className="group flex h-[130px] flex-col justify-between bg-bg p-5 transition-colors duration-300 hover:bg-orange"
             >
-              <span className="font-mono text-xs text-muted transition-colors duration-300 group-hover:text-black/70">
+              <span className="font-mono text-label text-muted transition-colors duration-300 group-hover:text-black/70">
                 {String(i + 1).padStart(2, '0')}
               </span>
               <span className="font-display text-xl font-bold leading-tight transition-colors duration-300 group-hover:text-black">

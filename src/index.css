@@ -13,6 +13,7 @@
   --orange-deep: #e8470c;
   --text: #f3eee6;
   --muted: #8d867b;
+  --muted-2: #a39c90;
   --line: rgba(243, 238, 230, 0.12);
   --line-soft: rgba(243, 238, 230, 0.06);
 }
@@ -58,7 +59,12 @@
      --stroke (defaults to orange). */
   .text-outline {
     color: transparent;
-    -webkit-text-stroke: 1.5px var(--stroke, var(--orange));
+    /* Scale the stroke with the type so it stays crisp when small and
+       reads with enough weight at the large hero sizes. */
+    -webkit-text-stroke: clamp(1.5px, 0.22vw, 3px) var(--stroke, var(--orange));
+    text-stroke: clamp(1.5px, 0.22vw, 3px) var(--stroke, var(--orange));
+    /* Avoid the centered-stroke eating into glyphs / clipping on descenders. */
+    paint-order: stroke fill;
   }
 
   .text-stroke-text {
@@ -83,6 +89,80 @@
   /* Pulsing "available" status dot */
   .animate-pulse-dot {
     animation: pulse-dot 1.8s ease-in-out infinite;
+  }
+
+  /* Tabular figures so digits don't jitter (stat numbers, aligned figures). */
+  .nums-tabular {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+  }
+
+  /* Hanging punctuation on body copy — progressive enhancement (ignored
+     where unsupported). */
+  .text-hang {
+    hanging-punctuation: first last;
+  }
+}
+
+/* ============================================================
+   Duotone Work imagery — every thumbnail gets the identical
+   black→orange treatment so the section reads as art-directed
+   regardless of the source screenshot's colours.
+   ============================================================ */
+.work-thumb {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  border-radius: 3px;
+  background: var(--bg-elev);
+}
+
+.work-thumb__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* Primary treatment — the inline SVG duotone filter (defined in App.jsx). */
+  filter: url('#duotone');
+  transform: scale(1);
+  transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* Subtle dark vignette — always on, unifies every thumb into the palette.
+   Lifting it on hover reads as the image brightening toward fuller orange. */
+.work-thumb__overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(120% 120% at 50% 0%, transparent 38%, rgba(11, 10, 8, 0.6) 100%);
+  opacity: 1;
+  transition: opacity 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* Fallback tint layer — only painted when SVG filters aren't supported. */
+.work-thumb__tint {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.group:hover .work-thumb__img {
+  transform: scale(1.04);
+}
+
+.group:hover .work-thumb__overlay {
+  opacity: 0.45;
+}
+
+/* Engines that choke on SVG url() filters: degrade to grayscale + an orange
+   blend layer so the duotone still reads. */
+@supports not (filter: url('#duotone')) {
+  .work-thumb__img {
+    filter: grayscale(1) contrast(1.05);
+  }
+  .work-thumb__tint {
+    background: var(--orange);
+    mix-blend-mode: color;
   }
 }
 
