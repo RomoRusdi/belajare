@@ -30,7 +30,7 @@ export default function CTA() {
       <Reveal delay={0.16}>
         <a
           href={`mailto:${site.email}`}
-          className="mt-14 inline-block border-2 border-orange bg-orange px-10 py-4 font-mono text-xs uppercase tracking-[0.2em] text-black transition-all duration-300 hover:-translate-y-1 hover:bg-transparent hover:text-orange"
+          className="mt-14 inline-block max-w-full break-all border-2 border-orange bg-orange px-6 py-4 font-mono text-[11px] uppercase tracking-[0.14em] text-black transition-all duration-300 hover:-translate-y-1 hover:bg-transparent hover:text-orange sm:px-10 sm:text-xs sm:tracking-[0.2em]"
         >
           {site.email}
         </a>

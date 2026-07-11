@@ -27,7 +27,7 @@ export default function Footer() {
               ) : (
                 <a
                   href={l.href}
-                  className="font-mono text-label uppercase text-text transition-colors hover:text-orange"
+                  className="inline-block py-1 font-mono text-label uppercase text-text transition-colors hover:text-orange"
                   {...(isExternal ? { target: '_blank', rel: 'noreferrer' } : {})}
                 >
                   {l.label}

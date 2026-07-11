@@ -71,15 +71,16 @@ export default function Navbar() {
         {/* Logo */}
         <a
           href="#top"
-          className="font-display text-xl uppercase tracking-wide"
+          className="py-2 font-display text-xl uppercase tracking-wide"
           aria-label={`${site.name} — home`}
         >
           {site.initials}
           <span className="text-orange">✦</span>
         </a>
 
-        {/* Center / right links — hidden on mobile */}
-        <ul className="hidden items-center gap-8 md:flex">
+        {/* Center / right links — compact type on mobile, full label voice
+            from md up. py padding keeps tap targets comfortable. */}
+        <ul className="flex items-center gap-4 sm:gap-6 md:gap-8">
           {navLinks.map((l) => {
             const isActive = active === l.href;
             return (
@@ -88,7 +89,7 @@ export default function Navbar() {
                   href={l.href}
                   onClick={(e) => onNavClick(e, l.href)}
                   aria-current={isActive ? 'true' : undefined}
-                  className={`group relative font-mono text-label uppercase transition-colors ${
+                  className={`group relative block px-0.5 py-2 font-mono text-[10px] uppercase tracking-[0.16em] transition-colors md:text-label ${
                     isActive ? 'text-orange' : ''
                   }`}
                 >

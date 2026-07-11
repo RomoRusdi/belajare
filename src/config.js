@@ -1,50 +1,46 @@
 /**
  * ============================================================
- *  Tuning knobs for the WebGL hero background (HeroCanvas).
- *  Dial these in — or flip `enabled` off — without touching
- *  shader code. Mobile/coarse-pointer devices use the reduced
- *  values automatically.
+ *  Tuning knobs for the synthwave hero background
+ *  (SynthwaveBackground.jsx). Dial these in — or flip `enabled`
+ *  off — without touching draw code. Mobile/coarse-pointer
+ *  devices use the reduced values automatically.
  * ============================================================
  */
-export const HERO_CONFIG = {
-  // Master switch. Set false to drop the WebGL hero entirely
-  // (the CSS hero background shows through instead).
+export const SYNTHWAVE_CONFIG = {
+  // Master switch. Set false to drop the canvas entirely
+  // (the plain CSS hero background shows through instead).
   enabled: true,
 
-  // Particle counts for the rotating point-cloud shell.
-  particleCount: 6000, // desktop / fine pointer
-  particleCountMobile: 2000, // <768px or coarse pointer
+  // Vertical position of the horizon line, as a fraction of hero height.
+  horizon: 0.62,
 
-  // Radius of the spherical shell the particles live on.
-  radius: 4.2,
+  // Sun centre X as a fraction of width — also the grid's vanishing point,
+  // so the perspective lines converge into the base of the sun. Desktop
+  // pushes it right of the headline; small screens centre it.
+  sunX: 0.72,
+  sunXMobile: 0.5,
 
-  // Continuous rotation speed (radians/second) around the Y axis.
-  rotationSpeed: 0.05,
+  // Sun radius = min(width, height) * this factor, clamped to px range.
+  sunRadiusFactor: 0.17,
+  sunRadiusMin: 70,
+  sunRadiusMax: 190,
 
-  // Vertical bob — amplitude (world units) and speed (radians/second).
-  driftAmplitude: 0.18,
-  driftSpeed: 0.4,
+  // Horizontal band cutouts across the sun's lower half (the retro sun).
+  sunBands: 6,
 
-  // Mouse parallax: how far the cloud tilts toward the cursor (radians)
-  // and how quickly it eases there (0–1 lerp factor per frame).
-  parallaxStrength: 0.25,
-  parallaxEase: 0.05,
+  // Grid: how many rows/columns of the perspective floor to draw.
+  gridRows: 13,
+  gridCols: 15, // per side of centre
+  gridColsMobile: 9,
 
-  // Base point size in (CSS) pixels, attenuated by distance in the shader.
-  // Keep this small — large additive points blow out to white and tank fill
-  // rate.
-  pointSize: 1.6,
+  // Floor scroll speed — full row-cycles per second (the "moving floor").
+  gridSpeed: 0.13,
 
-  // Bloom (post-processing). Threshold is high so only the bright particle
-  // cores bloom (not the whole field), keeping the centre dark enough for the
-  // white headline to read and avoiding a washed-out screen.
-  bloomIntensity: 0.5,
-  bloomIntensityMobile: 0.3,
-  bloomThreshold: 0.55,
-  bloomRadius: 0.5,
+  // Sky stars above the horizon.
+  starCount: 90,
+  starCountMobile: 40,
 
-  // Brand gradient the particles are coloured along — deep brick red
-  // rising to vintage cream, like hot film-grain embers.
-  colorEmber: '#a83a26', // deep brick
-  colorBright: '#e6d3a5', // cream highlight
+  // Cap on devicePixelRatio (2 keeps retina crisp without 3x fill cost).
+  maxDpr: 2,
+  maxDprMobile: 1.5,
 };

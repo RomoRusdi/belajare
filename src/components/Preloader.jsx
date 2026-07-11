@@ -70,7 +70,8 @@ export default function Preloader({ onComplete }) {
         >
           {/* Mono status label — bottom-left */}
           <div className="absolute bottom-8 left-[6vw] font-mono text-xs uppercase tracking-[0.2em] text-muted sm:text-sm">
-            Compiling portfolio <span className="text-muted/60">{'// loading assets'}</span>
+            Compiling portfolio{' '}
+            <span className="hidden text-muted/60 sm:inline">{'// loading assets'}</span>
           </div>
 
           {/* Huge percentage — bottom-right */}

@@ -1,16 +1,8 @@
-import { lazy, Suspense } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { site } from '../data.js';
 import RichText from '../lib/richText.jsx';
-import ErrorBoundary from './ErrorBoundary.jsx';
-import { HERO_CONFIG } from '../config.js';
-import { supportsWebGL } from '../lib/webgl.js';
+import SynthwaveBackground from './SynthwaveBackground.jsx';
 import { scrollToTarget } from '../lib/smoothScroll.js';
-
-// Code-split the three.js scene so it never blocks first paint. Until it
-// loads — and as the fallback when WebGL is unavailable or errors — the CSS
-// hero background simply shows through.
-const HeroCanvas = lazy(() => import('./HeroCanvas.jsx'));
 
 /**
  * Hero — full viewport, centered. The H1 is three stacked Anton words in
@@ -35,28 +27,18 @@ export default function Hero({ loaded }) {
     ease: [0.2, 0.7, 0.2, 1],
   });
 
-  // Mount the WebGL background only when it can run well: enabled, WebGL is
-  // available, and the user hasn't asked for reduced motion. Otherwise the
-  // CSS hero background stays — a broken/janky canvas is worse than none.
-  const showCanvas = HERO_CONFIG.enabled && !reduce && supportsWebGL();
-
   return (
     <section
       id="top"
       className="relative flex min-h-svh flex-col justify-center px-[6vw] pb-16 pt-28"
     >
-      {/* WebGL particle field — purely decorative, behind everything, never
-          intercepts pointer events. Wrapped in an error boundary so a WebGL
-          failure can never blank the hero. */}
-      {showCanvas && (
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
-          <ErrorBoundary>
-            <Suspense fallback={null}>
-              <HeroCanvas />
-            </Suspense>
-          </ErrorBoundary>
-        </div>
-      )}
+      {/* Synthwave backdrop — retro sun + scrolling perspective grid on a
+          plain 2D canvas. Purely decorative, behind everything, never
+          intercepts pointer events. Under reduced motion it renders a
+          static frame instead of animating. */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
+        <SynthwaveBackground animate={!reduce} />
+      </div>
 
       {/* Radial vignette — darkens the centre behind the headline so the
           type keeps contrast over the bloom. Sits between canvas and text. */}
@@ -106,7 +88,7 @@ export default function Hero({ loaded }) {
       <div className="relative z-10">
         {/* Kicker — diamond-flanked, cream */}
         <motion.p
-          className="mb-8 flex items-center gap-4 font-mono text-label uppercase text-cream"
+          className="mb-8 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[10px] uppercase tracking-[0.18em] text-cream sm:text-label"
           initial={reduce ? false : { opacity: 0, y: 18 }}
           animate={go ? { opacity: 1, y: 0 } : undefined}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.2, 0.7, 0.2, 1] }}
