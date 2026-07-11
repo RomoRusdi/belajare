@@ -4,6 +4,7 @@ import 'lenis/dist/lenis.css';
 import Preloader from './components/Preloader.jsx';
 import CursorGlow from './components/CursorGlow.jsx';
 import GrainOverlay from './components/GrainOverlay.jsx';
+import PageFrame from './components/PageFrame.jsx';
 import ScrollProgress from './components/ScrollProgress.jsx';
 import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
@@ -29,7 +30,7 @@ export default function App() {
   return (
     <>
       {/* Duotone filter for the Work thumbnails — maps shadows → near-black
-          and highlights → orange. Defined once, referenced via
+          and highlights → brick red. Defined once, referenced via
           `filter: url(#duotone)`. Decorative, hidden from a11y + layout. */}
       <svg width="0" height="0" aria-hidden="true" style={{ position: 'absolute' }}>
         <filter id="duotone" colorInterpolationFilters="sRGB">
@@ -41,9 +42,9 @@ export default function App() {
                     0    0    0    1 0"
           />
           <feComponentTransfer>
-            <feFuncR type="table" tableValues="0.043 1.0" />
-            <feFuncG type="table" tableValues="0.039 0.353" />
-            <feFuncB type="table" tableValues="0.031 0.122" />
+            <feFuncR type="table" tableValues="0.051 0.820" />
+            <feFuncG type="table" tableValues="0.039 0.314" />
+            <feFuncB type="table" tableValues="0.027 0.227" />
           </feComponentTransfer>
         </filter>
       </svg>
@@ -53,6 +54,7 @@ export default function App() {
       {/* Atmosphere — purely decorative, sit above the page, ignore pointer */}
       <CursorGlow />
       <GrainOverlay />
+      <PageFrame />
       <ScrollProgress visible={loaded} />
 
       <Navbar />

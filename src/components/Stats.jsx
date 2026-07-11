@@ -4,7 +4,7 @@ import { stats } from '../data.js';
 
 /**
  * Stats — a 4-up row (2-up on mobile) under a top hairline. Each stat is a
- * huge Syne number whose unit/suffix is orange, plus a mono muted label.
+ * huge Anton number whose unit/suffix is orange, plus a mono muted label.
  */
 export default function Stats() {
   return (
@@ -13,7 +13,7 @@ export default function Stats() {
         {stats.map((s, i) => (
           <Reveal key={s.label} delay={i * 0.08}>
             <div className="flex flex-col gap-3">
-              <div className="text-stat nums-tabular font-display font-extrabold">
+              <div className="text-stat nums-tabular font-display text-cream">
                 {s.value}
                 {s.unit && <span className="text-orange">{s.unit}</span>}
               </div>

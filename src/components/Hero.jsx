@@ -13,9 +13,11 @@ import { scrollToTarget } from '../lib/smoothScroll.js';
 const HeroCanvas = lazy(() => import('./HeroCanvas.jsx'));
 
 /**
- * Hero — full viewport, centered. The H1 is three stacked words that each
- * rise out of a clipped container with a staggered delay. The middle word
- * uses the transparent / orange-stroked outline style.
+ * Hero — full viewport, centered. The H1 is three stacked Anton words in
+ * brick red that each rise out of a clipped container with a staggered
+ * delay; the middle word uses the transparent / cream-stroked outline style.
+ * Retro HUD dressing: a diamond-flanked kicker, a slow-spinning concentric
+ * dial on the right, and registration ticks.
  *
  * Entrances wait for `loaded` (the preloader finishing) so the sequence
  * plays on a clean stage. Reduced motion shows everything immediately.
@@ -57,35 +59,74 @@ export default function Hero({ loaded }) {
       )}
 
       {/* Radial vignette — darkens the centre behind the headline so the
-          white type keeps contrast over the bloom. Sits between canvas and
-          text. */}
+          type keeps contrast over the bloom. Sits between canvas and text. */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 z-[1]"
         style={{
           background:
-            'radial-gradient(ellipse 70% 60% at 50% 45%, rgba(11,10,8,0.65) 0%, rgba(11,10,8,0.35) 38%, rgba(11,10,8,0) 75%)',
+            'radial-gradient(ellipse 70% 60% at 50% 45%, rgba(13,10,7,0.65) 0%, rgba(13,10,7,0.35) 38%, rgba(13,10,7,0) 75%)',
         }}
       />
 
+      {/* Spinning HUD dial — concentric circles with a diamond hub, echoing
+          the instrument ornaments in vintage sci-fi print. Desktop only. */}
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-[7vw] top-1/2 z-[1] hidden -translate-y-1/2 lg:block"
+        initial={reduce ? false : { opacity: 0 }}
+        animate={go ? { opacity: 1 } : undefined}
+        transition={{ duration: 1.2, delay: 1.1 }}
+      >
+        <svg
+          className="animate-spin-slow"
+          width="170"
+          height="170"
+          viewBox="0 0 170 170"
+          fill="none"
+        >
+          <circle cx="85" cy="85" r="82" stroke="var(--cream)" strokeOpacity="0.35" />
+          <circle
+            cx="85"
+            cy="85"
+            r="62"
+            stroke="var(--orange)"
+            strokeOpacity="0.6"
+            strokeDasharray="4 10"
+          />
+          <circle cx="85" cy="85" r="30" stroke="var(--cream)" strokeOpacity="0.25" />
+          {/* Cardinal ticks */}
+          <path d="M85 0v12M85 158v12M0 85h12M158 85h12" stroke="var(--cream)" strokeOpacity="0.5" />
+          {/* Diamond hub */}
+          <path d="M85 75l7 10-7 10-7-10z" fill="var(--orange)" />
+        </svg>
+      </motion.div>
+
       {/* Foreground content sits above the canvas + vignette. */}
       <div className="relative z-10">
-        {/* Kicker */}
+        {/* Kicker — diamond-flanked, cream */}
         <motion.p
-          className="mb-6 font-mono text-label uppercase text-orange"
+          className="mb-8 flex items-center gap-4 font-mono text-label uppercase text-cream"
           initial={reduce ? false : { opacity: 0, y: 18 }}
           animate={go ? { opacity: 1, y: 0 } : undefined}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.2, 0.7, 0.2, 1] }}
         >
+          <span aria-hidden="true" className="text-orange">
+            ✦
+          </span>
           {site.role}
+          <span aria-hidden="true" className="text-orange">
+            ✦
+          </span>
         </motion.p>
 
-        {/* Headline — clipped line-by-line rise */}
-        <h1 className="text-display-xl text-balance font-display font-extrabold uppercase">
+        {/* Headline — clipped line-by-line rise. Solid lines in brick red,
+            the outline line stroked in cream. */}
+        <h1 className="text-display-xl text-balance font-display uppercase text-orange">
           {site.heroLines.map((line, i) => (
             <span key={line.text} className="block overflow-hidden pb-[0.04em]">
               <motion.span
-                className={`block ${line.outline ? 'text-outline' : ''}`}
+                className={`block ${line.outline ? 'text-outline text-stroke-cream' : ''}`}
                 initial={reduce ? false : { y: '110%' }}
                 animate={go ? { y: '0%' } : undefined}
                 transition={lineTransition(0.25 + i * 0.15)}
@@ -121,6 +162,17 @@ export default function Hero({ loaded }) {
             </span>
           </a>
         </motion.div>
+
+        {/* Mega-tracked strip — the "F U T U R I S T I C" voice */}
+        <motion.p
+          aria-hidden="true"
+          className="tracking-mega mt-16 select-none text-center font-mono text-[10px] uppercase text-cream/60 sm:text-xs"
+          initial={reduce ? false : { opacity: 0 }}
+          animate={go ? { opacity: 1 } : undefined}
+          transition={{ duration: 1, delay: 1.2 }}
+        >
+          Fullstack · Web · Mobile
+        </motion.p>
       </div>
     </section>
   );

@@ -25,7 +25,7 @@ export default function Work() {
             >
               {/* Number — hidden on mobile */}
               <Label as="span" className="hidden md:block">
-                {String(i + 1).padStart(2, '0')}
+                [ {String(i + 1).padStart(2, '0')} ]
               </Label>
 
               {/* Duotone thumbnail — full width on mobile (stacks above text),
@@ -46,14 +46,14 @@ export default function Work() {
               </div>
 
               {/* Name */}
-              <span className="text-display-md text-balance font-display font-bold transition-colors duration-300 group-hover:text-orange">
+              <span className="text-display-md text-balance font-display uppercase transition-colors duration-300 group-hover:text-orange">
                 {p.name}
               </span>
 
               {/* Tags */}
               <span className="flex flex-wrap gap-2">
                 {p.tags.map((t) => (
-                  <Label key={t} className="rounded-full border border-line px-3 py-1">
+                  <Label key={t} className="border border-line px-3 py-1">
                     {t}
                   </Label>
                 ))}

@@ -3,7 +3,7 @@ import Label from './Label.jsx';
 import { site } from '../data.js';
 
 /**
- * CTA — centered, very tall padding. Mono orange eyebrow, a giant Syne
+ * CTA — centered, very tall padding. Mono orange eyebrow, a giant Anton
  * headline where "something" is rendered in the transparent / text-stroked
  * outline style, and a pill button that inverts to off-white on hover.
  */
@@ -20,17 +20,17 @@ export default function CTA() {
       </Reveal>
 
       <Reveal delay={0.08}>
-        <h2 className="text-display-xl text-balance font-display font-extrabold uppercase">
+        <h2 className="text-display-xl text-balance font-display uppercase text-orange">
           <span className="block">Let&rsquo;s build</span>
-          {/* outline style strokes in `text` colour per spec */}
-          <span className="block text-outline text-stroke-text">something</span>
+          {/* outline word strokes in cream — the retro two-tone pairing */}
+          <span className="block text-outline text-stroke-cream">something</span>
         </h2>
       </Reveal>
 
       <Reveal delay={0.16}>
         <a
           href={`mailto:${site.email}`}
-          className="mt-14 inline-block rounded-full bg-orange px-10 py-4 font-mono text-xs uppercase tracking-[0.2em] text-black transition-all duration-300 hover:-translate-y-1 hover:bg-text"
+          className="mt-14 inline-block border-2 border-orange bg-orange px-10 py-4 font-mono text-xs uppercase tracking-[0.2em] text-black transition-all duration-300 hover:-translate-y-1 hover:bg-transparent hover:text-orange"
         >
           {site.email}
         </a>

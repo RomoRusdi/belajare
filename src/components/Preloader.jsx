@@ -4,7 +4,7 @@ import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 /**
  * Preloader — full-screen overlay that counts 0% → 100% then slides away.
  *
- * - Huge Syne 800 percentage bottom-right (the "%" is orange).
+ * - Huge Anton percentage bottom-right (the "%" is orange).
  * - Mono status label bottom-left.
  * - Thin orange progress bar pinned to the very bottom, grows 0→100%.
  * - Locks body scroll until it finishes, then unlocks + calls onComplete.
@@ -74,7 +74,7 @@ export default function Preloader({ onComplete }) {
           </div>
 
           {/* Huge percentage — bottom-right */}
-          <div className="absolute bottom-6 right-[6vw] font-display text-[18vw] font-extrabold leading-none tracking-tight text-text sm:text-[14vw]">
+          <div className="absolute bottom-6 right-[6vw] font-display text-[18vw] leading-none text-cream sm:text-[14vw]">
             {count}
             <span className="text-orange">%</span>
           </div>

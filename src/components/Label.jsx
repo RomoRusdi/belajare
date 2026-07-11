@@ -1,6 +1,6 @@
 /**
  * <Label> — the single voice for all "metadata" text: kickers, section
- * titles, tags, eyebrows, captions, stat labels. JetBrains Mono, uppercase,
+ * titles, tags, eyebrows, captions, stat labels. Space Mono, uppercase,
  * 12px / 0.12em (the `label` type token), muted by default.
  *
  * Props:

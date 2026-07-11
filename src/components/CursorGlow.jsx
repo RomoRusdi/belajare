@@ -82,7 +82,7 @@ export default function CursorGlow() {
         marginLeft: '-260px',
         marginTop: '-260px',
         background:
-          'radial-gradient(circle, rgba(255,90,31,0.16) 0%, rgba(255,90,31,0.06) 35%, transparent 70%)',
+          'radial-gradient(circle, rgba(209,80,58,0.16) 0%, rgba(209,80,58,0.06) 35%, transparent 70%)',
       }}
     />
   );

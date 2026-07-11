@@ -31,7 +31,7 @@ export default function About() {
 
       {/* Big statement */}
       <Reveal>
-        <h2 className="max-w-[16ch] text-display-lg text-balance font-display font-bold">
+        <h2 className="max-w-[16ch] text-display-lg text-balance font-display uppercase">
           {renderStatement()}
         </h2>
       </Reveal>

@@ -52,19 +52,27 @@ export default function Footer() {
       {/* Giant outlined name */}
       <div className="mt-24 select-none" aria-hidden="true">
         <span
-          className="block font-display font-extrabold uppercase leading-[0.8] text-outline text-stroke-line"
-          style={{ fontSize: 'clamp(60px, 18vw, 260px)', letterSpacing: '-0.03em' }}
+          className="block break-words font-display uppercase leading-[0.9] text-outline text-stroke-line"
+          style={{ fontSize: 'clamp(44px, 12vw, 175px)' }}
         >
           {site.name}
         </span>
       </div>
 
+      {/* Mega-tracked location strip — the reference's letterspaced footer voice */}
+      <p
+        aria-hidden="true"
+        className="tracking-mega mt-16 select-none text-center font-mono text-[10px] uppercase text-cream/60 sm:text-xs"
+      >
+        {site.city} — {site.country}
+      </p>
+
       {/* Bottom row */}
-      <div className="mt-12 flex flex-col gap-3 border-t border-line pt-8 font-mono text-label uppercase text-muted sm:flex-row sm:items-center sm:justify-between">
+      <div className="mt-10 flex flex-col gap-3 border-t border-line pt-8 font-mono text-label uppercase text-muted sm:flex-row sm:items-center sm:justify-between">
         <span>
           © {year} {site.name}
         </span>
-        <span>Built from scratch · No templates</span>
+        <span>Built from scratch ✦ No templates</span>
       </div>
     </footer>
   );

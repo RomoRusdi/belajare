@@ -43,7 +43,8 @@ export const HERO_CONFIG = {
   bloomThreshold: 0.55,
   bloomRadius: 0.5,
 
-  // Brand gradient the particles are coloured along.
-  colorEmber: '#e8470c', // deep ember
-  colorBright: '#ff5a1f', // bright orange
+  // Brand gradient the particles are coloured along — deep brick red
+  // rising to vintage cream, like hot film-grain embers.
+  colorEmber: '#a83a26', // deep brick
+  colorBright: '#e6d3a5', // cream highlight
 };

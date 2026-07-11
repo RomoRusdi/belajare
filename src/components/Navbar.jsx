@@ -71,11 +71,11 @@ export default function Navbar() {
         {/* Logo */}
         <a
           href="#top"
-          className="font-display text-xl font-extrabold tracking-tight"
+          className="font-display text-xl uppercase tracking-wide"
           aria-label={`${site.name} — home`}
         >
           {site.initials}
-          <span className="text-orange">.</span>
+          <span className="text-orange">✦</span>
         </a>
 
         {/* Center / right links — hidden on mobile */}
@@ -112,8 +112,8 @@ export default function Navbar() {
         {site.available && (
           <div className="hidden items-center gap-2 font-mono text-label uppercase md:flex">
             <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-pulse-dot rounded-full bg-green-400" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-green-400" />
+              <span className="absolute inline-flex h-full w-full animate-pulse-dot rounded-full bg-orange" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-orange" />
             </span>
             Available for work
           </div>
